@@ -39,9 +39,13 @@ Each time you use one of these paths, you will have to use the fully-qualified U
 In your browser's address bar, type the "root path" of the server we have setup at http://first-ajax-api.herokuapp.com/, and hit enter. Inspect the request in the Network tab by clicking on it.
 
 1. What HTTP method did your browser use to make the request?
+    GET
 2. How many milliseconds did it take your browser to complete it?
+    136ms
 3. What HTTP status code did the server return? What does that mean?
+    200 (Successful)
 4. Was this an AJAX/Asynchronous request or a normal Synchronous request?
+    Synchronous
 
 ## Step 1 - Your First AJAX Request
 We're going to use jQuery to make our AJAX requests. A flexible, and powerful way to do this is using the `ajax` function inside jQuery. To invoke the `ajax` function, you call it on the `$` object, and pass in a JavaScript object as an argument. Every time we make an AJAX request, that object will have __4__ main attributes.
@@ -110,9 +114,9 @@ Let's switch to a URL that returns data in its response, and write a function to
 1. Add a new `<button>` that says "Run AJAX Request to Ping/Pong" to the Step 3,4,5,6 `<section>`
 2. Create a new AJAX request bound to the `<button>` that retrieves the information at the `/ping` url (Send no data, expect text as a response).
 3. Open your Network tab, reload the page, and run your request.
-4. Investigate the Response sub-tab, clicking through "Preview" and "Response". What is different between this request and the one to the "root path"?
-5. In a `done` callback, use console.log to write the responseData string to the console.
-6. Also in the `done` callback use jQuery to append the responseData string to the `<section>` element.
+4. Investigate the Response sub-tab, clicking through "Preview" and "Response". What is different between this request and the one to the "root path"? (THERE IS A LINE OF TEXT IN THE RESPONSE)
+5. In a `done` callback, use console.log to write the responseData string to the console. (DONE)
+6. Also in the `done` callback use jQuery to append the responseData string to the `<section>` element. (DONE)
 
 ## Step 4 - When Things Go Wrong...
 Just like any HTTP request, AJAX requests don't always work out. You might have the `url` wrong, be sending the wrong `data`, or perhaps your user just entered a subway tunnel and the internet cuts out. Sometimes, it is important to anticipate this situation and handle the outcome in a graceful way.
@@ -134,8 +138,8 @@ $.ajax({
 ### Practice
 1. Modify your AJAX request so that it points to the `/pong` url. Note that it's now p-o-n-g not p-i-n-g. This will simulate a server error.
 2. Open your Network tab, reload the page, and run your request.
-3. What is the new HTTP status code?
-4. Add a `fail` callback, and use jQuery to append a nice message to the `<section>` telling the user that you'll try harder next time.
+3. What is the new HTTP status code? (500)
+4. Add a `fail` callback, and use jQuery to append a nice message to the `<section>` telling the user that you'll try harder next time. (DONE)
 
 ## Step 5 - Tidy Up Time...
 Sometimes, there's code that needs to be run whether the request was a total success or a complete failure. You don't care about the outcome, but the request-response cycle has finished and there's cleanup work to do.
@@ -209,7 +213,7 @@ These "request parameters" will be sent to our server, and may affect the respon
 3. Add a `done` callback and write the responseData to the Step 8 `<section>`.
 4. Run the request, and see the current server time get written to the page.
 5. Modify the request to send a `timezone` as a piece of data, for example: 'Europe/Sofia'.
-6. Try sending a few different strings, and watch the response change. Some other valid timezones are: Europe/Athens, Europe/Lisbon, America/Mexico_City, Pacific/Honolulu, Asia/Kolkata, Pacific/Auckland
+6. Try sending a few different strings, and watch the response change. Some other valid timezones are: Europe/Athens, Europe/Lisbon, America/Mexico_City, Pacific/Honolulu, Asia/Kolkata, Pacific/Auckland (DONE AND WORKING)
 
 ## Step 9 - Receiving HTML in the Response
 Until now, every response we've received from the server was a 'text' type response. That is, just a string for us to console.log or write to our document. It's common for AJAX responses to contain more complex types, such as 'html'. Let's switch to a URL that will give us an 'html' type response. We call these small chunks of HTML markup "fragments", because they are often missing the `<html>`, `<head>`, and `<body>` tags.
@@ -227,6 +231,6 @@ That's it, you're done! This is a very common way for modern web apps to work. F
 Commit your code and this README.md file with your answers in it. Then push!
 
 ## Stretch
-1. Return to the `/pong` request. There's a hidden message there... can you find it? Can you find a way to capture this text and write it to the `<body>`? Hint: Since this request fails, you'll need to modify the method signature of your `.fail` callback to be `function( jqXHR, textStatus, errorThrown )`. Try putting a breakpoint inside your fail callback... Use it to inspect those newly captured variables...
+1. Return to the `/pong` request. There's a hidden message there... can you find it? Can you find a way to capture this text and write it to the `<body>`? Hint: Since this request fails, you'll need to modify the method signature of your `.fail` callback to be `function( jqXHR, textStatus, errorThrown )`. Try putting a breakpoint inside your fail callback... Use it to inspect those newly captured variables... (jqXHR.responseText = I'm sorry, Dave. I'm afraid I can't do that.)
 2. Return to the `/count` request. This URL actually accepts a data parameter called `amount`. What are the acceptable values for it? What does it do?
 3. Return to the `/time` request. Bind this request to a new `<button>`'s click event. Change from a hardcoded `timezone` parameter to accepting input from the user via a textbox. Add a `fail` callback that writes an error message to the `<section>`. Test it by entering an invalid `timezone` such as 'pokeroo'?
